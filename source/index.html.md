@@ -5,9 +5,9 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell: cURL
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='http://conqueringthecommandline.com/book/curl' target='_blank'>Learn more about cURL</a>
   - <a href='#'>Get the latest Postman collection</a> # must be linked to a GDrive with managed access
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href='https://github.com/lord/slate'>Made possible by Slate</a>
 
 includes:
   - headers
@@ -36,6 +36,8 @@ This documentation must not be available for everyone except for the devlopers w
 
 # Variables
 
+Endpoints aren't exposed to everyone. In case you don't know them, and you have a genuine reason to know, you have to reach us [here](mailto:developer@renyoo.co).
+
 Key | Environment | Value
 ---- | ------ | ------
 baseurl | Development | `you-should-know-by-now`
@@ -47,7 +49,7 @@ version | NA | `v1`
 ## SER1 - GET
 
 ```shell
-curl -i 
+curl -i -v
   -H "Content-Type: application/json" 
   -H "x-rnyoo-client: RnyooAndroid" 
   -k baseurl/version/  
@@ -103,7 +105,7 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 ## SER2 - GET
 
 ```shell
-curl -i 
+curl -i -v
   -H "Content-Type: application/json" 
   -H "x-rnyoo-client: RnyooAndroid" 
   -k baseurlp/version/update_check
@@ -138,7 +140,7 @@ curl -i
 
 This endpoint is to check for Android/iOS app minimum/optional version on the Playstore/Appstore respectively.
 
-<aside class="warning">Note that there is no DEV URL availabl. This is used by the deployed apps in Production and you must not use it for your development.</aside>
+<aside class="warning">Note that this endpoint uses Production URL. This is used by the deployed apps in Production and you must not use it for your development.</aside>
 
 ### HTTP Request
 
@@ -174,7 +176,8 @@ Code | Message | Notes
 ## SER2.a - POST
 
 ```shell
-curl -i 
+curl -i -v
+  -X POST
   -H "Content-Type: application/json" 
   -H "x-rnyoo-client: RnyooAndroid" 
   -d '{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}'
@@ -226,7 +229,7 @@ Code | Message | Notes
 ## SER3 - GET
 
 ```shell
-curl -i 
+curl -i -v
   -H "Content-Type: application/json" 
   -H "x-rnyoo-client: RnyooAndroid" 
   -k baseurl/version/configs
@@ -272,6 +275,135 @@ Code | Message | Notes
 404 | Service not found | Wrong API endpoint
 
 # Utilities
+
+## SEO1 - GET
+
+```shell
+curl -i -v
+  -H "Content-Type: application/json" 
+  -H "x-rnyoo-client: RnyooAndroid" 
+  -k baseurl/version/countries
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+    {
+        "name": "Afghanistan",
+        "dial_code": "+93",
+        "code": "AF"
+    },
+    .
+    .
+    {
+        "name": "India",
+        "dial_code": "+91",
+        "code": "IN"
+    },
+    .
+    .
+    {
+        "name": "Zimbabwe",
+        "dial_code": "+263",
+        "code": "ZW"
+    }
+]
+```
+
+This endpoint is to fetch the countries listing.
+
+### HTTP Request
+
+`GET baseurl/version/countries`
+
+### Query/URL Parameters
+
+NONE
+
+### Data Parameters
+
+NA
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+name | `India` | Country name
+dial_code | `+91` | Country calling code
+code | `AIzaSyDqsmilenowO28kXQqPc` | Country code
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+
+## SEO2 - GET
+
+```shell
+curl -i -v
+  -H "Content-Type: application/json" 
+  -H "x-rnyoo-client: RnyooAndroid" 
+  -k baseurl/version/countries/status
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+    {
+        "name": "Afghanistan",
+        "dial_code": "+93",
+        "code": "AF"
+    },
+    .
+    .
+    {
+        "name": "India",
+        "dial_code": "+91",
+        "code": "IN"
+    },
+    .
+    .
+    {
+        "name": "Zimbabwe",
+        "dial_code": "+263",
+        "code": "ZW"
+    }
+]
+```
+
+This endpoint is to fetch the countries listing.
+
+### HTTP Request
+
+`GET baseurl/version/countries/status`
+
+### Query/URL Parameters
+
+NONE
+
+### Data Parameters
+
+NA
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+name | `India` | Country name
+dial_code | `+91` | Country calling code
+code | `AIzaSyDqsmilenowO28kXQqPc` | Country code
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+
 
 # Users
 
