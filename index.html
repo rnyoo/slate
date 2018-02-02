@@ -226,6 +226,9 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="authentication">Authentication</a>
           </li>
           <li>
+            <a href="#variables" class="toc-h1 toc-link" data-title="variables">Variables</a>
+          </li>
+          <li>
             <a href="#root-services" class="toc-h1 toc-link" data-title="root-services">Root Services</a>
               <ul class="toc-list-h2">
                   <li>
@@ -236,6 +239,9 @@
                   </li>
                   <li>
                     <a href="#ser2-a-post" class="toc-h2 toc-link" data-title="ser2-a-post">SER2.a - POST</a>
+                  </li>
+                  <li>
+                    <a href="#ser3-get" class="toc-h2 toc-link" data-title="ser3-get">SER3 - GET</a>
                   </li>
               </ul>
           </li>
@@ -264,6 +270,20 @@
             <a href="#geotags" class="toc-h1 toc-link" data-title="geotags">Geotags</a>
           </li>
           <li>
+            <a href="#headers" class="toc-h1 toc-link" data-title="headers">Headers</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#request-headers" class="toc-h2 toc-link" data-title="request-headers">Request Headers</a>
+                  </li>
+                  <li>
+                    <a href="#response-headers" class="toc-h2 toc-link" data-title="response-headers">Response Headers</a>
+                  </li>
+                  <li>
+                    <a href="#response-body" class="toc-h2 toc-link" data-title="response-body">Response Body</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
           </li>
       </div>
@@ -285,30 +305,39 @@
 
 <p>Do visit here often and more importantly, contribute to this documentation regularly and make the world a better place for your fellow devlopers.</p>
 <h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>Renyoo don&#39;t use (yet) API keys to allow access to the API for the clients. This is something we wish to do sooner than later but until then, make sure the endpoints are not exposed to others.</p>
 
-<p>I am not sure if Renyoo uses API keys to allow access to the API. If it is, this section must guide on how to do that. </p>
-
-<p>In case of using API keys, Renyoo expects the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<aside class="warning">
+This documentation must not be available for everyone except for the devlopers working on Renyoo platform.
 </aside>
+<h1 id='variables'>Variables</h1>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Environment</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>baseurl</td>
+<td>Development</td>
+<td><code>you-should-know-by-now</code></td>
+</tr>
+<tr>
+<td>baseurlp</td>
+<td>Production</td>
+<td><code>you-should-know-by-now</code></td>
+</tr>
+<tr>
+<td>version</td>
+<td>NA</td>
+<td><code>v1</code></td>
+</tr>
+</tbody></table>
 <h1 id='root-services'>Root Services</h1><h2 id='ser1-get'>SER1 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i 
   -H <span class="s2">"Content-Type: application/json"</span> 
   -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> 
-  -k http://android.rnyoo.ws/v1/  
+  -k baseurl/version/  
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -322,25 +351,69 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint is to know the server status.</p>
+<p>This is the root endpoint to get the Server info and status of the server-side components. </p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://android.rnyoo.ws/v1/</code></p>
+<p><code>GET baseurl/version/</code></p>
 <h3 id='query-url-parameters'>Query/URL Parameters</h3>
 <p>NONE</p>
 <h3 id='data-parameters'>Data Parameters</h3>
-<p>NA (as its meant for HTTP verbs other than GET)</p>
+<p>NA </p>
 <h3 id='response-parameters'>Response Parameters</h3>
-<p>Description about the keys and their values in the response is explained here.</p>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>server</td>
+<td><code>Rnyoo REST API Server</code></td>
+<td>Server name</td>
+</tr>
+<tr>
+<td>serverVersion</td>
+<td><code>v1.0.0-84-g199a7a3-dirty</code></td>
+<td>Server version</td>
+</tr>
+<tr>
+<td>serverDate</td>
+<td><code>2018-02-02 09:27:41.355367</code></td>
+<td>Server current date and time</td>
+</tr>
+<tr>
+<td>servicesHealth</td>
+<td><code>true</code></td>
+<td><code>true</code>OR<code>false</code>based on the service availability</td>
+</tr>
+</tbody></table>
 <h3 id='error-codes'>Error codes</h3>
-<p>Description about different error codes in the response and the workflows where they are triggered.</p>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+</tbody></table>
 
 <aside class="success">
-Additional info about the endpoint.
+This must be hit initially and/or subsequently (whenever required) to check if the server is up and show relevant message (alternate workflow) when down.
 </aside>
 <h2 id='ser2-get'>SER2 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i 
   -H <span class="s2">"Content-Type: application/json"</span> 
   -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> 
-  -k https://api.rnyoo.ws/v1/update_check
+  -k baseurlp/version/update_check
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -368,22 +441,83 @@ Additional info about the endpoint.
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint is to check for Android/iOS app update on the Playstore/Appstore respectively.</p>
+<p>This endpoint is to check for Android/iOS app minimum/optional version on the Playstore/Appstore respectively.</p>
 
-<aside class="warning">Understand that this is for deployed apps in Production and you must not use it for your development.</aside>
+<aside class="warning">Note that there is no DEV URL availabl. This is used by the deployed apps in Production and you must not use it for your development.</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://api.rnyoo.ws/v1/update_check</code></p>
+<p><code>GET baseurlp/version/update_check</code></p>
 <h3 id='query-url-parameters-2'>Query/URL Parameters</h3>
 <p>NONE</p>
 <h3 id='data-parameters-2'>Data Parameters</h3>
-<p>NA (as its meant for HTTP verbs other than GET)</p>
+<p>NA </p>
 <h3 id='response-parameters-2'>Response Parameters</h3>
-<p>Description about the keys and their values in the response is explained here.</p>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>android</td>
+<td>JSON object</td>
+<td>Android details</td>
+</tr>
+<tr>
+<td>ios</td>
+<td>JSON object</td>
+<td>iOS details</td>
+</tr>
+<tr>
+<td>optionalUpdate</td>
+<td>JSON object</td>
+<td>optional version details</td>
+</tr>
+<tr>
+<td>requiredUpdate</td>
+<td>JSON object</td>
+<td>required version details</td>
+</tr>
+<tr>
+<td>optionalVersion</td>
+<td><code>1.0.3</code></td>
+<td>optional update version for the app</td>
+</tr>
+<tr>
+<td>minimumVersion</td>
+<td><code>1.1</code></td>
+<td>minimum update version for the app</td>
+</tr>
+<tr>
+<td>message</td>
+<td><code>some msg here</code></td>
+<td>message to be displayed along with optional / required version suggestion</td>
+</tr>
+</tbody></table>
 <h3 id='error-codes-2'>Error codes</h3>
-<p>Description about different error codes in the response and the workflows where they are triggered.</p>
-<h2 id='ser2-a-post'>SER2.a - POST</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/Posts/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+</tbody></table>
+<h2 id='ser2-a-post'>SER2.a - POST</h2><pre class="highlight shell tab-shell"><code>curl -i 
+  -H <span class="s2">"Content-Type: application/json"</span> 
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> 
+  -d <span class="s1">'{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}'</span>
+  -k baseurlp/version/appversions
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -393,73 +527,304 @@ Additional info about the endpoint.
   </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific Post.</p>
+<p>This endpoint is to set the optional / required app update versions for Android/iOS apps in Playstore/Appstore respectively.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/Posts/&lt;ID&gt;</code></p>
+<p><code>POST baseurlp/version/appversions</code></p>
 <h3 id='query-url-parameters-3'>Query/URL Parameters</h3>
 <p>NA</p>
 <h3 id='data-parameters-3'>Data Parameters</h3>
-<p>Description about the keys and values in the request payload.</p>
-<h3 id='response-parameters-3'>Response Parameters</h3>
-<p>Description about the keys and their values in the response is explained here.</p>
-<h3 id='error-codes-3'>Error codes</h3>
-<p>Description about different error codes in the response and the workflows where they are triggered.</p>
-<h1 id='utilities'>Utilities</h1><h1 id='users'>Users</h1><h1 id='pod-post'>Pod/Post</h1><h1 id='interests'>Interests</h1><h1 id='buddies'>Buddies</h1><h1 id='channels'>Channels</h1><h1 id='groups'>Groups</h1><h1 id='geotags'>Geotags</h1><h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>android</td>
+<td>JSON object</td>
+<td>Android details</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>ios</td>
+<td>JSON object</td>
+<td>iOS details</td>
 </tr>
+<tr>
+<td>optionalUpdate</td>
+<td>JSON object</td>
+<td>optional version details</td>
+</tr>
+<tr>
+<td>requiredUpdate</td>
+<td>JSON object</td>
+<td>required version details</td>
+</tr>
+<tr>
+<td>optionalVersion</td>
+<td><code>1.0.3</code></td>
+<td>optional update version for the app</td>
+</tr>
+<tr>
+<td>minimumVersion</td>
+<td><code>1.1</code></td>
+<td>minimum update version for the app</td>
+</tr>
+<tr>
+<td>message</td>
+<td><code>some msg here</code></td>
+<td>message to be displayed along with optional / required version suggestion</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-3'>Response Parameters</h3>
+<p>Description about the keys and their values in the response is explained here.</p>
+<h3 id='error-codes-3'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+</tbody></table>
+<h2 id='ser3-get'>SER3 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i 
+  -H <span class="s2">"Content-Type: application/json"</span> 
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> 
+  -k baseurl/version/configs
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"web_domain_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://beta.rnyoo.co"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cdn_base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rnyoodevusers.s3.amazonaws.com/"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fcm_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AIzaSyDqFVSPvOjLXQv-1TO1hx9jTXO28kXQqPc"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint is to fetch the app configuration.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET baseurl/version/configs</code></p>
+<h3 id='query-url-parameters-4'>Query/URL Parameters</h3>
+<p>NONE</p>
+<h3 id='data-parameters-4'>Data Parameters</h3>
+<p>NA</p>
+<h3 id='response-parameters-4'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>web_domain_url</td>
+<td><code>https://beta.rnyoo.co</code></td>
+<td>explain this</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>cdn_base_url</td>
+<td><code>https://rnyoodevusers.s3.amazonaws.com/</code></td>
+<td>explain this</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+<td>fcm_key</td>
+<td><code>AIzaSyDqsmilenowO28kXQqPc</code></td>
+<td>explain this</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-4'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+</tbody></table>
+<h1 id='utilities'>Utilities</h1><h1 id='users'>Users</h1><h1 id='pod-post'>Pod/Post</h1><h1 id='interests'>Interests</h1><h1 id='buddies'>Buddies</h1><h1 id='channels'>Channels</h1><h1 id='groups'>Groups</h1><h1 id='geotags'>Geotags</h1><h1 id='headers'>Headers</h1>
+<aside class="success">
+This section lists down the <code>Request Headers</code> and <code>Response Headers</code> that Renyoo API uses and their possible meaning. Make sure you understand these codes and factor them while interacting with the API.
+</aside>
+<h2 id='request-headers'>Request Headers</h2>
+<p>First few are added explicitly, while the rest are added by the client.</p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>content-type</td>
+<td><code>application/json</code></td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>accept</td>
+<td><code>*/*</code></td>
 </tr>
 <tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+<td>cache-control</td>
+<td><code>no-cache</code></td>
 </tr>
 <tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>user-agent</td>
+<td><code>PostmanRuntime/7.1.1</code></td>
+</tr>
+<tr>
+<td>host</td>
+<td><code>android.rnyoo.ws</code></td>
+</tr>
+<tr>
+<td>accept-encoding</td>
+<td><code>gzip, deflate</code></td>
+</tr>
+</tbody></table>
+<h2 id='response-headers'>Response Headers</h2>
+<p><code>HTTP/&lt;VERSION&gt; &lt;HTTP-STATUS-CODE&gt; &lt;MESSAGE&gt;</code></p>
+
+<p>e.g.: HTTP/1.1 200 OK   </p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Notes</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>content-type</td>
+<td>--</td>
+<td><code>application/json</code></td>
+</tr>
+<tr>
+<td>vary</td>
+<td>--</td>
+<td><code>accept</code></td>
+</tr>
+<tr>
+<td>date</td>
+<td>Server current date and time</td>
+<td><code>Fri, 02 Feb 2018 08:02:16 GMT</code></td>
+</tr>
+<tr>
+<td>content-length</td>
+<td>--</td>
+<td><code>141</code></td>
+</tr>
+<tr>
+<td>access-control-allow-methods</td>
+<td>--</td>
+<td><code>GET, PUT, POST, DELETE, OPTIONS</code></td>
+</tr>
+<tr>
+<td>access-control-allow-origin</td>
+<td>--</td>
+<td><code>*</code></td>
+</tr>
+<tr>
+<td>access-control-allow-headers</td>
+<td>--</td>
+<td>Origin, X-Requested-With, X-Forward-For, Content-Type, Accept, Accept-Encoding, Content-Disposition</td>
+</tr>
+<tr>
+<td>server</td>
+<td>Server Name</td>
+<td><code>Rnyoo Aqua-0.1</code></td>
+</tr>
+<tr>
+<td>X-Rnyoo-Messsage</td>
+<td>Message from server for the given Request</td>
+<td><code>e.g: Let the Bulls run!!</code></td>
+</tr>
+</tbody></table>
+<h2 id='response-body'>Response Body</h2>
+<p>This section explains the Response body in case of any errors. List of possible error codes can be seen in the next section.</p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td><code>404</code></td>
+<td>HTTP Status code</td>
+</tr>
+<tr>
+<td>error</td>
+<td><code>Service not found</code></td>
+<td>Error message</td>
+</tr>
+<tr>
+<td>server</td>
+<td><code>Rnyoo REST API Server</code></td>
+<td>Server name</td>
+</tr>
+<tr>
+<td>serverVersion</td>
+<td><code>v1.0.0-84-g199a7a3-dirty</code></td>
+<td>Server version</td>
+</tr>
+<tr>
+<td>serverDate</td>
+<td><code>2018-02-02 08:44:41.710299</code></td>
+<td>Current date and time on the server</td>
+</tr>
+<tr>
+<td>servicesHealth</td>
+<td><code>true</code></td>
+<td><code>true</code>OR<code>false</code>based on the service availability</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="success">
+This section lists down the <code>Error codes</code> that Renyoo API uses and their possible meaning. Make sure you understand these codes and factor them while interacting with the API.
+</aside>
+
+<p>The Renyoo API uses the following Error codes:</p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Reason</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
 </tr>
 </tbody></table>
 
