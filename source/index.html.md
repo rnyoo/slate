@@ -10,6 +10,7 @@ toc_footers:
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - headers
   - errors
 
 search: true
@@ -27,24 +28,10 @@ Do visit here often and more importantly, contribute to this documentation regul
 
 # Authentication
 
-> To authorize, use this code:
+Renyoo don't use (yet) API keys to allow access to the API for the clients. This is something we wish to do sooner than later but until then, make sure the endpoints are not exposed to others.
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-I am not sure if Renyoo uses API keys to allow access to the API. If it is, this section must guide on how to do that. 
-
-In case of using API keys, Renyoo expects the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<aside class="warning">
+This documentation must not be available for everyone except for the devlopers working on Renyoo platform.
 </aside>
 
 # Root Services
@@ -189,6 +176,47 @@ NA
 ### Data Parameters
 
 Description about the keys and values in the request payload.
+
+### Response Parameters
+
+Description about the keys and their values in the response is explained here.
+
+### Error codes
+
+Description about different error codes in the response and the workflows where they are triggered.
+
+## SER3 - GET
+
+```shell
+curl -i 
+  -H "Content-Type: application/json" 
+  -H "x-rnyoo-client: RnyooAndroid" 
+  -k http://android.rnyoo.ws/v1/configs
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "web_domain_url": "https://beta.rnyoo.co",
+    "cdn_base_url": "https://rnyoodevusers.s3.amazonaws.com/",
+    "fcm_key": "AIzaSyDqFVSPvOjLXQv-1TO1hx9jTXO28kXQqPc"
+}
+```
+
+This endpoint is to fetch the app configuration.
+
+### HTTP Request
+
+`GET http://android.rnyoo.ws/v1/configs`
+
+### Query/URL Parameters
+
+NONE
+
+### Data Parameters
+
+NA
 
 ### Response Parameters
 
