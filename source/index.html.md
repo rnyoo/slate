@@ -1,14 +1,12 @@
 ---
-title: API Reference
+title: Renyoo API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  - shell: cURL
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='#'>Get the latest Postman collection</a> # must be linked to a GDrive with managed access
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -19,27 +17,17 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to Renyoo API !! If you are here, you know what Renyoo is all about and chances are you've contributed, in whichever capacity, to make it what it is today. Yeah i know the negative connations .. that is intentional :).
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+So without much ado, lets do what you intend to do here. The UI is pretty self-explanatory and in this age of Digital Navigation, am pretty sure you will not be lost here.
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Browse through the menu or search to find your endpoint of interest. Click on one to read about the endpoint in detail and go through the code examples and sample request/response to understand it better. Reach out to us [here](mailto:developer@renyoo.co) in case you need any further assistance. 
+
+Do visit here often and more importantly, contribute to this documentation regularly and make the world a better place for your fellow devlopers.
 
 # Authentication
 
 > To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
 
 ```shell
 # With shell, you can just pass the correct header with each request
@@ -47,17 +35,11 @@ curl "api_endpoint_here"
   -H "Authorization: meowmeowmeow"
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+I am not sure if Renyoo uses API keys to allow access to the API. If it is, this section must guide on how to do that. 
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+In case of using API keys, Renyoo expects the API key to be included in all API requests to the server in a header that looks like the following:
 
 `Authorization: meowmeowmeow`
 
@@ -65,34 +47,15 @@ Kittn expects for the API key to be included in all API requests to the server i
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-# Kittens
+# Root Services
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## SER1 - GET
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+curl -i 
+  -H "Content-Type: application/json" 
+  -H "x-rnyoo-client: RnyooAndroid" 
+  -k http://android.rnyoo.ws/v1/  
 ```
 
 > The above command returns JSON structured like this:
@@ -100,120 +63,108 @@ let kittens = api.kittens.get();
 ```json
 [
   {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
+    "server": "Rnyoo REST API Server",
+    "serverVersion": "v1.0.0-84-g199a7a3-dirty",
+    "serverDate": "2018-02-02 06:37:13.750496",
+    "servicesHealth": true
+}
 ]
 ```
 
-This endpoint retrieves all kittens.
+This endpoint is to know the server status.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET http://android.rnyoo.ws/v1/ `
 
-### Query Parameters
+### Query/URL Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+NONE
+
+### Data Parameters
+
+NA (as its meant for HTTP verbs other than GET)
+
+### Response Parameters
+
+Description about the keys and their values in the response is explained here.
+
+### Error codes
+
+Description about different error codes in the response and the workflows where they are triggered.
+
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Additional info about the endpoint.
 </aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## SER2 - GET
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+curl -i 
+  -H "Content-Type: application/json" 
+  -H "x-rnyoo-client: RnyooAndroid" 
+  -k https://api.rnyoo.ws/v1/update_check
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+    "android": {
+        "optionalUpdate": {
+            "optionalVersion": "1.0.3",
+            "message": "A new version of the application is available, please click below to update to the latest version"
+        },
+        "requiredUpdate": {
+            "minimumVersion": "1.0.3",
+            "message": "A new version of the application is available and is required to continue, please click below to update to the latest version"
+        }
+    },
+    "ios": {
+        "optionalUpdate": {
+            "optionalVersion": "1.2",
+            "message": "A new version of the app is available."
+        },
+        "requiredUpdate": {
+            "minimumVersion": "1.1",
+            "message": "An update is required to continue using this app."
+        }
+    }
 }
 ```
 
-This endpoint retrieves a specific kitten.
+This endpoint is to check for Android/iOS app update on the Playstore/Appstore respectively.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<aside class="warning">Understand that this is for deployed apps in Production and you must not use it for your development.</aside>
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://api.rnyoo.ws/v1/update_check`
 
-### URL Parameters
+### Query/URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+NONE
 
-## Delete a Specific Kitten
+### Data Parameters
 
-```ruby
-require 'kittn'
+NA (as its meant for HTTP verbs other than GET)
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
+### Response Parameters
 
-```python
-import kittn
+Description about the keys and their values in the response is explained here.
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+### Error codes
+
+Description about different error codes in the response and the workflows where they are triggered.
+
+
+## SER2.a - POST
 
 ```shell
-curl "http://example.com/api/kittens/2"
+curl "http://example.com/api/Posts/2"
   -X DELETE
   -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
 ```
 
 > The above command returns JSON structured like this:
@@ -225,15 +176,41 @@ let max = api.kittens.delete(2);
 }
 ```
 
-This endpoint deletes a specific kitten.
+This endpoint deletes a specific Post.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`DELETE http://example.com/Posts/<ID>`
 
-### URL Parameters
+### Query/URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+NA
 
+### Data Parameters
+
+Description about the keys and values in the request payload.
+
+### Response Parameters
+
+Description about the keys and their values in the response is explained here.
+
+### Error codes
+
+Description about different error codes in the response and the workflows where they are triggered.
+
+
+# Utilities
+
+# Users
+
+# Pod/Post
+
+# Interests
+
+# Buddies
+
+# Channels
+
+# Groups
+
+# Geotags
