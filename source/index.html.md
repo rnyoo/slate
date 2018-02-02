@@ -34,6 +34,14 @@ Renyoo don't use (yet) API keys to allow access to the API for the clients. This
 This documentation must not be available for everyone except for the devlopers working on Renyoo platform.
 </aside>
 
+# Variables
+
+Key | Environment | Value
+---- | ------ | ------
+baseurl | Development | `you-should-know-by-now`
+baseurlp | Production | `you-should-know-by-now`
+version | NA | `v1`
+
 # Root Services
 
 ## SER1 - GET
@@ -42,7 +50,7 @@ This documentation must not be available for everyone except for the devlopers w
 curl -i 
   -H "Content-Type: application/json" 
   -H "x-rnyoo-client: RnyooAndroid" 
-  -k http://android.rnyoo.ws/v1/  
+  -k baseurl/version/  
 ```
 
 > The above command returns JSON structured like this:
@@ -58,11 +66,11 @@ curl -i
 ]
 ```
 
-This endpoint is to know the server status.
+This is the root endpoint to get the Server info and status of the server-side components. 
 
 ### HTTP Request
 
-`GET http://android.rnyoo.ws/v1/ `
+`GET baseurl/version/ `
 
 ### Query/URL Parameters
 
@@ -70,19 +78,26 @@ NONE
 
 ### Data Parameters
 
-NA (as its meant for HTTP verbs other than GET)
+NA 
 
 ### Response Parameters
 
-Description about the keys and their values in the response is explained here.
+Key | Value | Notes
+---- | ------ | ------
+server | `Rnyoo REST API Server` | Server name
+serverVersion | `v1.0.0-84-g199a7a3-dirty` | Server version
+serverDate | `2018-02-02 09:27:41.355367` | Server current date and time
+servicesHealth | `true ` | `true`OR`false`based on the service availability
 
 ### Error codes
 
-Description about different error codes in the response and the workflows where they are triggered.
-
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
 
 <aside class="success">
-Additional info about the endpoint.
+This must be hit initially and/or subsequently (whenever required) to check if the server is up and show relevant message (alternate workflow) when down.
 </aside>
 
 ## SER2 - GET
@@ -91,7 +106,7 @@ Additional info about the endpoint.
 curl -i 
   -H "Content-Type: application/json" 
   -H "x-rnyoo-client: RnyooAndroid" 
-  -k https://api.rnyoo.ws/v1/update_check
+  -k baseurlp/version/update_check
 ```
 
 > The above command returns JSON structured like this:
@@ -121,13 +136,13 @@ curl -i
 }
 ```
 
-This endpoint is to check for Android/iOS app update on the Playstore/Appstore respectively.
+This endpoint is to check for Android/iOS app minimum/optional version on the Playstore/Appstore respectively.
 
-<aside class="warning">Understand that this is for deployed apps in Production and you must not use it for your development.</aside>
+<aside class="warning">Note that there is no DEV URL availabl. This is used by the deployed apps in Production and you must not use it for your development.</aside>
 
 ### HTTP Request
 
-`GET https://api.rnyoo.ws/v1/update_check`
+`GET baseurlp/version/update_check`
 
 ### Query/URL Parameters
 
@@ -135,23 +150,35 @@ NONE
 
 ### Data Parameters
 
-NA (as its meant for HTTP verbs other than GET)
+NA 
 
 ### Response Parameters
 
-Description about the keys and their values in the response is explained here.
+Key | Value | Notes
+---- | ------ | ------
+android | JSON object | Android details
+ios | JSON object | iOS details
+optionalUpdate | JSON object | optional version details
+requiredUpdate | JSON object | required version details
+optionalVersion | `1.0.3` | optional update version for the app
+minimumVersion | `1.1` | minimum update version for the app
+message | `some msg here ` | message to be displayed along with optional / required version suggestion
 
 ### Error codes
 
-Description about different error codes in the response and the workflows where they are triggered.
-
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
 
 ## SER2.a - POST
 
 ```shell
-curl "http://example.com/api/Posts/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
+curl -i 
+  -H "Content-Type: application/json" 
+  -H "x-rnyoo-client: RnyooAndroid" 
+  -d '{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}'
+  -k baseurlp/version/appversions
 ```
 
 > The above command returns JSON structured like this:
@@ -163,11 +190,11 @@ curl "http://example.com/api/Posts/2"
 }
 ```
 
-This endpoint deletes a specific Post.
+This endpoint is to set the optional / required app update versions for Android/iOS apps in Playstore/Appstore respectively.
 
 ### HTTP Request
 
-`DELETE http://example.com/Posts/<ID>`
+`POST baseurlp/version/appversions`
 
 ### Query/URL Parameters
 
@@ -175,7 +202,15 @@ NA
 
 ### Data Parameters
 
-Description about the keys and values in the request payload.
+Key | Value | Notes
+---- | ------ | ------
+android | JSON object | Android details
+ios | JSON object | iOS details
+optionalUpdate | JSON object | optional version details
+requiredUpdate | JSON object | required version details
+optionalVersion | `1.0.3` | optional update version for the app
+minimumVersion | `1.1` | minimum update version for the app
+message | `some msg here ` | message to be displayed along with optional / required version suggestion
 
 ### Response Parameters
 
@@ -183,7 +218,10 @@ Description about the keys and their values in the response is explained here.
 
 ### Error codes
 
-Description about different error codes in the response and the workflows where they are triggered.
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
 
 ## SER3 - GET
 
@@ -191,7 +229,7 @@ Description about different error codes in the response and the workflows where 
 curl -i 
   -H "Content-Type: application/json" 
   -H "x-rnyoo-client: RnyooAndroid" 
-  -k http://android.rnyoo.ws/v1/configs
+  -k baseurl/version/configs
 ```
 
 > The above command returns JSON structured like this:
@@ -208,7 +246,7 @@ This endpoint is to fetch the app configuration.
 
 ### HTTP Request
 
-`GET http://android.rnyoo.ws/v1/configs`
+`GET baseurl/version/configs`
 
 ### Query/URL Parameters
 
@@ -220,12 +258,18 @@ NA
 
 ### Response Parameters
 
-Description about the keys and their values in the response is explained here.
+Key | Value | Notes
+---- | ------ | ------
+web_domain_url | `https://beta.rnyoo.co` | explain this
+cdn_base_url | `https://rnyoodevusers.s3.amazonaws.com/` | explain this
+fcm_key | `AIzaSyDqsmilenowO28kXQqPc` | explain this
 
 ### Error codes
 
-Description about different error codes in the response and the workflows where they are triggered.
-
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
 
 # Utilities
 
