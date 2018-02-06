@@ -247,9 +247,25 @@
           </li>
           <li>
             <a href="#utilities" class="toc-h1 toc-link" data-title="utilities">Utilities</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#seo1-get" class="toc-h2 toc-link" data-title="seo1-get">SEO1 - GET</a>
+                  </li>
+                  <li>
+                    <a href="#seo2-get" class="toc-h2 toc-link" data-title="seo2-get">SEO2 - GET</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#users" class="toc-h1 toc-link" data-title="users">Users</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#seu0-a-post" class="toc-h2 toc-link" data-title="seu0-a-post">SEU0.a - POST</a>
+                  </li>
+                  <li>
+                    <a href="#seu0-b-post" class="toc-h2 toc-link" data-title="seu0-b-post">SEU0.b - POST</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#pod-post" class="toc-h1 toc-link" data-title="pod-post">Pod/Post</a>
@@ -288,9 +304,9 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='http://conqueringthecommandline.com/book/curl' target='_blank'>Learn more about cURL</a></li>
             <li><a href='#'>Get the latest Postman collection</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://github.com/lord/slate'>Made possible by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -311,6 +327,8 @@
 This documentation must not be available for everyone except for the devlopers working on Renyoo platform.
 </aside>
 <h1 id='variables'>Variables</h1>
+<p>Endpoints aren&#39;t exposed to everyone. In case you don&#39;t know them, and you have a genuine reason to know, you have to reach us <a href="mailto:developer@renyoo.co">here</a>.</p>
+
 <table><thead>
 <tr>
 <th>Key</th>
@@ -334,9 +352,9 @@ This documentation must not be available for everyone except for the devlopers w
 <td><code>v1</code></td>
 </tr>
 </tbody></table>
-<h1 id='root-services'>Root Services</h1><h2 id='ser1-get'>SER1 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i 
-  -H <span class="s2">"Content-Type: application/json"</span> 
-  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> 
+<h1 id='root-services'>Root Services</h1><h2 id='ser1-get'>SER1 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
   -k baseurl/version/  
 </code></pre>
 <blockquote>
@@ -410,9 +428,9 @@ This documentation must not be available for everyone except for the devlopers w
 <aside class="success">
 This must be hit initially and/or subsequently (whenever required) to check if the server is up and show relevant message (alternate workflow) when down.
 </aside>
-<h2 id='ser2-get'>SER2 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i 
-  -H <span class="s2">"Content-Type: application/json"</span> 
-  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> 
+<h2 id='ser2-get'>SER2 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
   -k baseurlp/version/update_check
 </code></pre>
 <blockquote>
@@ -443,7 +461,7 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 </span></code></pre>
 <p>This endpoint is to check for Android/iOS app minimum/optional version on the Playstore/Appstore respectively.</p>
 
-<aside class="warning">Note that there is no DEV URL availabl. This is used by the deployed apps in Production and you must not use it for your development.</aside>
+<aside class="warning">Note that this endpoint uses Production URL. This is used by the deployed apps in Production and you must not use it for your development.</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET baseurlp/version/update_check</code></p>
 <h3 id='query-url-parameters-2'>Query/URL Parameters</h3>
@@ -513,18 +531,18 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 <td>Wrong API endpoint</td>
 </tr>
 </tbody></table>
-<h2 id='ser2-a-post'>SER2.a - POST</h2><pre class="highlight shell tab-shell"><code>curl -i 
-  -H <span class="s2">"Content-Type: application/json"</span> 
-  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> 
-  -d <span class="s1">'{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}'</span>
+<h2 id='ser2-a-post'>SER2.a - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -d <span class="s1">'{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}'</span> <span class="se">\</span>
   -k baseurlp/version/appversions
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">  
+  </span><span class="s2">"This JSON has to be updated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint is to set the optional / required app update versions for Android/iOS apps in Playstore/Appstore respectively.</p>
@@ -597,9 +615,9 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 <td>Wrong API endpoint</td>
 </tr>
 </tbody></table>
-<h2 id='ser3-get'>SER3 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i 
-  -H <span class="s2">"Content-Type: application/json"</span> 
-  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> 
+<h2 id='ser3-get'>SER3 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
   -k baseurl/version/configs
 </code></pre>
 <blockquote>
@@ -661,7 +679,397 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 <td>Wrong API endpoint</td>
 </tr>
 </tbody></table>
-<h1 id='utilities'>Utilities</h1><h1 id='users'>Users</h1><h1 id='pod-post'>Pod/Post</h1><h1 id='interests'>Interests</h1><h1 id='buddies'>Buddies</h1><h1 id='channels'>Channels</h1><h1 id='groups'>Groups</h1><h1 id='geotags'>Geotags</h1><h1 id='headers'>Headers</h1>
+<h1 id='utilities'>Utilities</h1><h2 id='seo1-get'>SEO1 - GET</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -k baseurl/version/countries
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Afghanistan"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dial_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+93"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">.</span><span class="w">
+    </span><span class="err">.</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"India"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dial_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+91"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IN"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">.</span><span class="w">
+    </span><span class="err">.</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zimbabwe"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dial_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+263"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZW"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint is to fetch the countries listing.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET baseurl/version/countries</code></p>
+<h3 id='query-url-parameters-5'>Query/URL Parameters</h3>
+<p>NONE</p>
+<h3 id='data-parameters-5'>Data Parameters</h3>
+<p>NA</p>
+<h3 id='response-parameters-5'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td><code>India</code></td>
+<td>Country name</td>
+</tr>
+<tr>
+<td>dial_code</td>
+<td><code>+91</code></td>
+<td>Country calling code</td>
+</tr>
+<tr>
+<td>code</td>
+<td><code>IN</code></td>
+<td>Country code</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-5'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+</tbody></table>
+<h2 id='seo2-get'>SEO2 - GET</h2><pre class="highlight shell tab-shell"><code><span class="c"># https://www.epochconverter.com/ to get the value for URL params (t)</span>
+curl -i -v -G <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -d <span class="s1">'t=1517837468'</span> <span class="se">\</span>
+  -k baseurl/version/countries/status
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Afghanistan"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dial_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+93"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">.</span><span class="w">
+    </span><span class="err">.</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"India"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dial_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+91"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IN"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">.</span><span class="w">
+    </span><span class="err">.</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zimbabwe"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dial_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+263"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZW"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint is to fetch the countries listing (with Timestamp passed as URL param).</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET baseurl/version/countries/status</code></p>
+<h3 id='query-url-parameters-6'>Query/URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>t</td>
+<td><code>1517837468</code></td>
+<td>UNIX Timestamp</td>
+</tr>
+</tbody></table>
+<h3 id='data-parameters-6'>Data Parameters</h3>
+<p>NA</p>
+<h3 id='response-parameters-6'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td><code>India</code></td>
+<td>Country name</td>
+</tr>
+<tr>
+<td>dial_code</td>
+<td><code>+91</code></td>
+<td>Country calling code</td>
+</tr>
+<tr>
+<td>code</td>
+<td><code>IN</code></td>
+<td>Country code</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-6'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+</tbody></table>
+<h1 id='users'>Users</h1><h2 id='seu0-a-post'>SEU0.a - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -d <span class="s1">'{"email_s" : "shreekavi@gleecus.com"}'</span> <span class="se">\</span>
+  -k baseurl/version/users/validate/email 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"email_s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shreekavi@gleecus.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You can create Rnyoo account with this email"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the input email address is already in use by another Renyoo account:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">#</span><span class="w"> </span><span class="err">HTTP</span><span class="w"> </span><span class="err">Status</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="mi">400</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"email_s"</span><span class="p">:</span><span class="s2">"sandeep@gleecus.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"unavailable"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="s2">"Given email address is already in use by another Rnyoo account"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to validate user email availability as part of Account Registration workflow.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/validate/email</code></p>
+<h3 id='query-url-parameters-7'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-7'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email_s</td>
+<td><code>shreekavi@gleecus.com</code></td>
+<td>User input email</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-7'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email_s</td>
+<td><code>shreekavi@gleecus.com</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>validate</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>available</code></td>
+<td><code>available</code> OR <code>unavailable</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td><code>You can create Rnyoo ...</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-7'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>Email address already in use</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Make sure that the input email is of valid format before sending the request as the check isn't implemented upstream.
+</aside>
+<h2 id='seu0-b-post'>SEU0.b - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -d <span class="s1">'{"phoneNumber_s" : "+919030055449"}'</span> <span class="se">\</span>
+  -k baseurl/version/users/validate/phonenumber 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"phoneNumber_s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+919030055449"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You can create Rnyoo account with this email"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the input email address is already in use by another Renyoo account:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">#</span><span class="w"> </span><span class="err">HTTP</span><span class="w"> </span><span class="err">Status</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="mi">400</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"phoneNumber_s"</span><span class="p">:</span><span class="s2">"+919030055449"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"unavailable"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="s2">"Given phone number is already in use by another Rnyoo account"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to validate user phone number availability as part of Account Registration workflow.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/validate/phonenumber</code></p>
+<h3 id='query-url-parameters-8'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-8'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>phoneNumber_s</td>
+<td><code>+919030055449</code></td>
+<td>User input phone number</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-8'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>phoneNumber_s</td>
+<td><code>+919030055449</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>validate</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>available</code></td>
+<td><code>available</code> OR <code>unavailable</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td><code>You can create Rnyoo ...</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-8'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>Phone number already in use</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Make sure that the input phone number is of valid format before sending the request as the check isn't implemented upstream.
+</aside>
+<h1 id='pod-post'>Pod/Post</h1><h1 id='interests'>Interests</h1><h1 id='buddies'>Buddies</h1><h1 id='channels'>Channels</h1><h1 id='groups'>Groups</h1><h1 id='geotags'>Geotags</h1><h1 id='headers'>Headers</h1>
 <aside class="success">
 This section lists down the <code>Request Headers</code> and <code>Response Headers</code> that Renyoo API uses and their possible meaning. Make sure you understand these codes and factor them while interacting with the API.
 </aside>
@@ -825,6 +1233,11 @@ This section lists down the <code>Error codes</code> that Renyoo API uses and th
 <td>404</td>
 <td>Service not found</td>
 <td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Server Error - Please contact Administrator</td>
+<td>Application Error</td>
 </tr>
 </tbody></table>
 
