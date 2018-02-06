@@ -11,3 +11,4 @@ Code | Message | Reason
 ---------- | ------- | --------
 403 | Access Forbidden | Missing `x-rnyoo-client` header
 404 | Service not found | Wrong API endpoint
+500 | Server Error - Please contact Administrator | Application Error

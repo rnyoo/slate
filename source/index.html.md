@@ -49,9 +49,9 @@ version | NA | `v1`
 ## SER1 - GET
 
 ```shell
-curl -i -v
-  -H "Content-Type: application/json" 
-  -H "x-rnyoo-client: RnyooAndroid" 
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
   -k baseurl/version/  
 ```
 
@@ -105,9 +105,9 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 ## SER2 - GET
 
 ```shell
-curl -i -v
-  -H "Content-Type: application/json" 
-  -H "x-rnyoo-client: RnyooAndroid" 
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
   -k baseurlp/version/update_check
 ```
 
@@ -176,20 +176,19 @@ Code | Message | Notes
 ## SER2.a - POST
 
 ```shell
-curl -i -v
-  -X POST
-  -H "Content-Type: application/json" 
-  -H "x-rnyoo-client: RnyooAndroid" 
-  -d '{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}'
+curl -i -v \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
+  -d '{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}' \
   -k baseurlp/version/appversions
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 2,
-  "deleted" : ":("
+{  
+  "This JSON has to be updated" : ":("
 }
 ```
 
@@ -229,9 +228,9 @@ Code | Message | Notes
 ## SER3 - GET
 
 ```shell
-curl -i -v
-  -H "Content-Type: application/json" 
-  -H "x-rnyoo-client: RnyooAndroid" 
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
   -k baseurl/version/configs
 ```
 
@@ -279,9 +278,9 @@ Code | Message | Notes
 ## SEO1 - GET
 
 ```shell
-curl -i -v
-  -H "Content-Type: application/json" 
-  -H "x-rnyoo-client: RnyooAndroid" 
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
   -k baseurl/version/countries
 ```
 
@@ -331,7 +330,7 @@ Key | Value | Notes
 ---- | ------ | ------
 name | `India` | Country name
 dial_code | `+91` | Country calling code
-code | `AIzaSyDqsmilenowO28kXQqPc` | Country code
+code | `IN` | Country code
 
 ### Error codes
 
@@ -343,9 +342,11 @@ Code | Message | Notes
 ## SEO2 - GET
 
 ```shell
-curl -i -v
-  -H "Content-Type: application/json" 
-  -H "x-rnyoo-client: RnyooAndroid" 
+# https://www.epochconverter.com/ to get the value for URL params (t)
+curl -i -v -G \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
+  -d 't=1517837468' \
   -k baseurl/version/countries/status
 ```
 
@@ -375,7 +376,7 @@ curl -i -v
 ]
 ```
 
-This endpoint is to fetch the countries listing.
+This endpoint is to fetch the countries listing (with Timestamp passed as URL param).
 
 ### HTTP Request
 
@@ -383,7 +384,9 @@ This endpoint is to fetch the countries listing.
 
 ### Query/URL Parameters
 
-NONE
+Key | Value | Notes
+---- | ------ | ------
+t | `1517837468` | UNIX Timestamp
 
 ### Data Parameters
 
@@ -395,7 +398,7 @@ Key | Value | Notes
 ---- | ------ | ------
 name | `India` | Country name
 dial_code | `+91` | Country calling code
-code | `AIzaSyDqsmilenowO28kXQqPc` | Country code
+code | `IN` | Country code
 
 ### Error codes
 
@@ -406,6 +409,149 @@ Code | Message | Notes
 
 
 # Users
+
+## SEU0.a - POST
+
+```shell
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
+  -d '{"email_s" : "shreekavi@gleecus.com"}' \
+  -k baseurl/version/users/validate/email 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "email_s": "shreekavi@gleecus.com",
+    "action": "validate",
+    "status": "available",
+    "message": "You can create Rnyoo account with this email"
+}
+```
+
+> In case the input email address is already in use by another Renyoo account:
+
+```json
+# HTTP Status code will be 400
+{
+    "email_s":"sandeep@gleecus.com",
+    "action":"validate",
+    "status":"unavailable",
+    "message":"Given email address is already in use by another Rnyoo account"
+}
+```
+
+This is the endpoint to validate user email availability as part of Account Registration workflow.
+
+### HTTP Request
+
+`POST baseurl/version/users/validate/email`
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+email_s | `shreekavi@gleecus.com` | User input email
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+email_s | `shreekavi@gleecus.com` | --
+action | `validate` | --
+status | `available` | `available` OR `unavailable`
+message | `You can create Rnyoo ... ` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+400 | Bad Request | Email address already in use
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
+<aside class="notice">
+Make sure that the input email is of valid format before sending the request as the check isn't implemented upstream.
+</aside>
+
+## SEU0.b - POST
+
+```shell
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
+  -d '{"phoneNumber_s" : "+919030055449"}' \
+  -k baseurl/version/users/validate/phonenumber 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "phoneNumber_s": "+919030055449",
+    "action": "validate",
+    "status": "available",
+    "message": "You can create Rnyoo account with this email"
+}
+```
+
+> In case the input email address is already in use by another Renyoo account:
+
+```json
+# HTTP Status code will be 400
+{
+    "phoneNumber_s":"+919030055449",
+    "action":"validate",
+    "status":"unavailable",
+    "message":"Given phone number is already in use by another Rnyoo account"
+}
+```
+
+This is the endpoint to validate user phone number availability as part of Account Registration workflow.
+
+### HTTP Request
+
+`POST baseurl/version/users/validate/phonenumber`
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+phoneNumber_s | `+919030055449` | User input phone number
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+phoneNumber_s | `+919030055449` | --
+action | `validate` | --
+status | `available` | `available` OR `unavailable`
+message | `You can create Rnyoo ... ` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+400 | Bad Request | Phone number already in use
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
+<aside class="notice">
+Make sure that the input phone number is of valid format before sending the request as the check isn't implemented upstream.
+</aside>
+
 
 # Pod/Post
 
