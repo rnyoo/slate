@@ -265,6 +265,27 @@
                   <li>
                     <a href="#seu0-b-post" class="toc-h2 toc-link" data-title="seu0-b-post">SEU0.b - POST</a>
                   </li>
+                  <li>
+                    <a href="#seu0-c-post" class="toc-h2 toc-link" data-title="seu0-c-post">SEU0.c - POST</a>
+                  </li>
+                  <li>
+                    <a href="#seu1-post" class="toc-h2 toc-link" data-title="seu1-post">SEU1 - POST</a>
+                  </li>
+                  <li>
+                    <a href="#seu1-a-post" class="toc-h2 toc-link" data-title="seu1-a-post">SEU1.a - POST</a>
+                  </li>
+                  <li>
+                    <a href="#seu1-b-post" class="toc-h2 toc-link" data-title="seu1-b-post">SEU1.b - POST</a>
+                  </li>
+                  <li>
+                    <a href="#seu1-c-post" class="toc-h2 toc-link" data-title="seu1-c-post">SEU1.c - POST</a>
+                  </li>
+                  <li>
+                    <a href="#seu2-post" class="toc-h2 toc-link" data-title="seu2-post">SEU2 - POST</a>
+                  </li>
+                  <li>
+                    <a href="#seu2-a-post" class="toc-h2 toc-link" data-title="seu2-a-post">SEU2.a - POST</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -372,6 +393,25 @@ This documentation must not be available for everyone except for the devlopers w
 <p>This is the root endpoint to get the Server info and status of the server-side components. </p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET baseurl/version/</code></p>
+<h3 id='request-headers'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-url-parameters'>Query/URL Parameters</h3>
 <p>NONE</p>
 <h3 id='data-parameters'>Data Parameters</h3>
@@ -464,6 +504,25 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 <aside class="warning">Note that this endpoint uses Production URL. This is used by the deployed apps in Production and you must not use it for your development.</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET baseurlp/version/update_check</code></p>
+<h3 id='request-headers-2'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-url-parameters-2'>Query/URL Parameters</h3>
 <p>NONE</p>
 <h3 id='data-parameters-2'>Data Parameters</h3>
@@ -532,7 +591,6 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 </tr>
 </tbody></table>
 <h2 id='ser2-a-post'>SER2.a - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
-  -X POST <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
   -d <span class="s1">'{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}'</span> <span class="se">\</span>
@@ -545,9 +603,30 @@ This must be hit initially and/or subsequently (whenever required) to check if t
   </span><span class="s2">"This JSON has to be updated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint is to set the optional / required app update versions for Android/iOS apps in Playstore/Appstore respectively.</p>
+<p>This endpoint is to set the optional / required app update versions, as and when they are available, for Android/iOS apps in Playstore/Appstore respectively.</p>
+
+<aside class="warning">Note that this endpoint uses Production URL. This is used during Production deployment, probably by a CI/CD pipeline and you must not use it for your development.</aside>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST baseurlp/version/appversions</code></p>
+<h3 id='request-headers-3'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-url-parameters-3'>Query/URL Parameters</h3>
 <p>NA</p>
 <h3 id='data-parameters-3'>Data Parameters</h3>
@@ -632,6 +711,25 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 <p>This endpoint is to fetch the app configuration.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET baseurl/version/configs</code></p>
+<h3 id='request-headers-4'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-url-parameters-4'>Query/URL Parameters</h3>
 <p>NONE</p>
 <h3 id='data-parameters-4'>Data Parameters</h3>
@@ -712,6 +810,25 @@ This must be hit initially and/or subsequently (whenever required) to check if t
 <p>This endpoint is to fetch the countries listing.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>GET baseurl/version/countries</code></p>
+<h3 id='request-headers-5'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-url-parameters-5'>Query/URL Parameters</h3>
 <p>NONE</p>
 <h3 id='data-parameters-5'>Data Parameters</h3>
@@ -794,6 +911,25 @@ curl -i -v -G <span class="se">\</span>
 <p>This endpoint is to fetch the countries listing (with Timestamp passed as URL param).</p>
 <h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET baseurl/version/countries/status</code></p>
+<h3 id='request-headers-6'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-url-parameters-6'>Query/URL Parameters</h3>
 <table><thead>
 <tr>
@@ -856,14 +992,14 @@ curl -i -v -G <span class="se">\</span>
 <h1 id='users'>Users</h1><h2 id='seu0-a-post'>SEU0.a - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
-  -d <span class="s1">'{"email_s" : "shreekavi@gleecus.com"}'</span> <span class="se">\</span>
+  -d <span class="s1">'{"email_s" : "uname@domain.tld"}'</span> <span class="se">\</span>
   -k baseurl/version/users/validate/email 
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"email_s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shreekavi@gleecus.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email_s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uname@domain.tld"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You can create Rnyoo account with this email"</span><span class="w">
@@ -874,7 +1010,7 @@ curl -i -v -G <span class="se">\</span>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="err">#</span><span class="w"> </span><span class="err">HTTP</span><span class="w"> </span><span class="err">Status</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="mi">400</span><span class="w">
 </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"email_s"</span><span class="p">:</span><span class="s2">"sandeep@gleecus.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email_s"</span><span class="p">:</span><span class="s2">"uname@domain.tld"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"unavailable"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="s2">"Given email address is already in use by another Rnyoo account"</span><span class="w">
@@ -883,6 +1019,25 @@ curl -i -v -G <span class="se">\</span>
 <p>This is the endpoint to validate user email availability as part of Account Registration workflow.</p>
 <h3 id='http-request-7'>HTTP Request</h3>
 <p><code>POST baseurl/version/users/validate/email</code></p>
+<h3 id='request-headers-7'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-url-parameters-7'>Query/URL Parameters</h3>
 <p>NA</p>
 <h3 id='data-parameters-7'>Data Parameters</h3>
@@ -895,7 +1050,7 @@ curl -i -v -G <span class="se">\</span>
 </thead><tbody>
 <tr>
 <td>email_s</td>
-<td><code>shreekavi@gleecus.com</code></td>
+<td><code>uname@domain.tld</code></td>
 <td>User input email</td>
 </tr>
 </tbody></table>
@@ -909,7 +1064,7 @@ curl -i -v -G <span class="se">\</span>
 </thead><tbody>
 <tr>
 <td>email_s</td>
-<td><code>shreekavi@gleecus.com</code></td>
+<td><code>uname@domain.tld</code></td>
 <td>--</td>
 </tr>
 <tr>
@@ -964,25 +1119,25 @@ Make sure that the input email is of valid format before sending the request as 
 <h2 id='seu0-b-post'>SEU0.b - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
-  -d <span class="s1">'{"phoneNumber_s" : "+919030055449"}'</span> <span class="se">\</span>
+  -d <span class="s1">'{"phoneNumber_s" : "+919030090300"}'</span> <span class="se">\</span>
   -k baseurl/version/users/validate/phonenumber 
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"phoneNumber_s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+919030055449"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phoneNumber_s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+919030090300"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You can create Rnyoo account with this email"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>In case the input email address is already in use by another Renyoo account:</p>
+<p>In case the input phone number is already in use by another Renyoo account:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="err">#</span><span class="w"> </span><span class="err">HTTP</span><span class="w"> </span><span class="err">Status</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="mi">400</span><span class="w">
 </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"phoneNumber_s"</span><span class="p">:</span><span class="s2">"+919030055449"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phoneNumber_s"</span><span class="p">:</span><span class="s2">"+919030090300"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"unavailable"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="s2">"Given phone number is already in use by another Rnyoo account"</span><span class="w">
@@ -991,6 +1146,25 @@ Make sure that the input email is of valid format before sending the request as 
 <p>This is the endpoint to validate user phone number availability as part of Account Registration workflow.</p>
 <h3 id='http-request-8'>HTTP Request</h3>
 <p><code>POST baseurl/version/users/validate/phonenumber</code></p>
+<h3 id='request-headers-8'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-url-parameters-8'>Query/URL Parameters</h3>
 <p>NA</p>
 <h3 id='data-parameters-8'>Data Parameters</h3>
@@ -1003,7 +1177,7 @@ Make sure that the input email is of valid format before sending the request as 
 </thead><tbody>
 <tr>
 <td>phoneNumber_s</td>
-<td><code>+919030055449</code></td>
+<td><code>+919030090300</code></td>
 <td>User input phone number</td>
 </tr>
 </tbody></table>
@@ -1017,7 +1191,7 @@ Make sure that the input email is of valid format before sending the request as 
 </thead><tbody>
 <tr>
 <td>phoneNumber_s</td>
-<td><code>+919030055449</code></td>
+<td><code>+919030090300</code></td>
 <td>--</td>
 </tr>
 <tr>
@@ -1069,6 +1243,1360 @@ Make sure that the input email is of valid format before sending the request as 
 <aside class="notice">
 Make sure that the input phone number is of valid format before sending the request as the check isn't implemented upstream.
 </aside>
+<h2 id='seu0-c-post'>SEU0.c - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -d <span class="s1">'{"screenName_s" : "stallion"}'</span> <span class="se">\</span>
+  -k baseurl/version/users/validate/screenname 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"screenName_s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stallion"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You can create Rnyoo account with this screen name"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the input screen name is already in use by another Renyoo account:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">#</span><span class="w"> </span><span class="err">HTTP</span><span class="w"> </span><span class="err">Status</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="mi">400</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"screenName_s"</span><span class="p">:</span><span class="s2">"gekbull"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"validate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"unavailable"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="s2">"Given screen name is already in use by another Rnyoo account"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to validate user screen name availability as part of Account Registration workflow.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/validate/screenname</code></p>
+<h3 id='request-headers-9'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
+<h3 id='query-url-parameters-9'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-9'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>screenName_s</td>
+<td><code>stallion</code></td>
+<td>User input screen name</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-9'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>screenName_s</td>
+<td><code>stallion</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>validate</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>available</code></td>
+<td><code>available</code> OR <code>unavailable</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td><code>You can create Rnyoo ...</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-9'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>Screen name already in use</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Make sure that the input screen name is of valid format before sending the request as the check isn't implemented upstream.
+</aside>
+<h2 id='seu1-post'>SEU1 - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -d <span class="s1">'{"name_t":"Full Name","userType_s":"general", "gender_s":"male", "screenName_s":"stallion","email_s":"uname@domain.tld","phone":{"countryCode":"+91","number":"9030090300"},"platformForReg":"ios","oauthSource":"Google+","timeZone":"GMT +5:30","avatar":"http://rnyooassets.s3.amazonaws.com/avatars/default.png","statusMessage":"I Rnyoo","preferredChannels":["Gadgets"],"devices":{"ios":[{"deviceId":"foobarIOS","registrationId":"foobarIOSRegistrationId","deviceType":"phone","osVersion":"9.1","registeredOn":1527084033}]}, "bio": "Name is Bond."}'</span> <span class="se">\</span>
+  -k baseurl/version/users/new 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"otwF8kvzsushh0dn6hhMY"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activationCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">481865</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activationStatus"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the input email address, phone number, screen name is already in use by another Renyoo account:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email, screen name and phone number are already in use"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to create user account with Renyoo on Mobile app using Social platform(s).</p>
+
+<aside class="warning">Note that this endpoint is obsolete. Social Registration/Login is a thing of past, aleast for Renyoo..</aside>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/new</code></p>
+<h3 id='request-headers-10'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
+<h3 id='query-url-parameters-10'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-10'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name_t</td>
+<td><code>Full Name</code></td>
+<td>letters, numbers, spaces, max20</td>
+</tr>
+<tr>
+<td>userType_s</td>
+<td><code>general</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>gender_s</td>
+<td><code>male</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>screenName_s</td>
+<td><code>stallion</code></td>
+<td>unique. letters, numbers, max15</td>
+</tr>
+<tr>
+<td>email_s</td>
+<td><code>uname@domain.tld</code></td>
+<td>unique. standard format</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>JSON object hash</td>
+<td>2 keys</td>
+</tr>
+<tr>
+<td>countryCode</td>
+<td><code>+91</code></td>
+<td>picked up from dropdown</td>
+</tr>
+<tr>
+<td>number</td>
+<td><code>9030090300</code></td>
+<td>unique. numbers min6 max10</td>
+</tr>
+<tr>
+<td>platformForReg</td>
+<td><code>ios</code></td>
+<td><code>android</code> OR <code>ios</code></td>
+</tr>
+<tr>
+<td>oauthSource</td>
+<td><code>Google+</code></td>
+<td><code>Google+</code> OR <code>Facebook</code></td>
+</tr>
+<tr>
+<td>timeZone</td>
+<td><code>GMT +5.30</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td><code>../default.png</code></td>
+<td>fully qualified address</td>
+</tr>
+<tr>
+<td>statusMessage</td>
+<td><code>I Renyoo</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>preferredChannels</td>
+<td><code>[&quot;Gadgets&quot;]</code></td>
+<td>comma separated values in array</td>
+</tr>
+<tr>
+<td>devices</td>
+<td>JSON object hash</td>
+<td>--</td>
+</tr>
+<tr>
+<td>ios</td>
+<td>JSON object array of hashes w/ 5 keys</td>
+<td><code>android</code> OR <code>ios</code> based on platformForReg value</td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td><code>foobarIOS</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>registrationId</td>
+<td><code>foobarIOSRegistrationId</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>deviceType</td>
+<td><code>phone</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>osVersion</td>
+<td><code>9.1</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>registeredOn</td>
+<td><code>1527084033</code></td>
+<td>current Unix epoch</td>
+</tr>
+<tr>
+<td>bio</td>
+<td><code>Name is Bond</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-10'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><code>otwF8kvzSqndsuAaAJ0dn6hhMY</code></td>
+<td><code>uid</code> to be passed with subsequent requests.</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>new_user</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>success</code></td>
+<td><code>success</code> OR <code>error</code></td>
+</tr>
+<tr>
+<td>activationCode</td>
+<td><code>481865</code></td>
+<td>OTP to complete activation</td>
+</tr>
+<tr>
+<td>activationStatus</td>
+<td><code>false</code></td>
+<td>always <code>false</code></td>
+</tr>
+<tr>
+<td>reason</td>
+<td><code>Reason for failure</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-10'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Don't trust the user and make sure user input is validated before hitting the request.
+</aside>
+<h2 id='seu1-a-post'>SEU1.a - POST</h2><pre class="highlight shell tab-shell"><code><span class="c"># use SHA256 Cryptographic Hash Function on the Password in your respective platforms. Use converters online to test the API.</span>
+curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -d <span class="s1">'{"name_t":"Full Name", "userType_s":"general","gender_s":"female","screenName_s":"stallion","password":"d608joeydontsharefood0786a", "email_s":"uname@domain.tld","phone":{"countryCode":"+91","number":"9030090300"},"platformForReg":"android","oauthSource":"rnyoo","timeZone":"GMT +5:30","avatar":"http://rnyooassets.s3.amazonaws.com/avatars/default.png","statusMessage":"I Rnyoo","preferredChannels":["Gadgets"],"devices":{"android":[{"deviceId":"foobarAndroidNoSocial","registrationId":"foobarAndroidNoSocialRegId","deviceType":"phone","osVersion":"4.1.1","registeredOn":1527084033}]} ,"bio": "I am Italian Stallion!!"}'</span> <span class="se">\</span>
+  -k baseurl/version/users/new 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"4ROmJvlhvoilakNOg31u1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activationCode"</span><span class="p">:</span><span class="mi">427862</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activationStatus"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the input email address, phone number, screen name is already in use by another Renyoo account:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email, screen name and phone number are already in use"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to create user account with Renyoo on Mobile app.</p>
+<h3 id='http-request-11'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/new</code></p>
+<h3 id='request-headers-11'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code> OR <code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
+<h3 id='query-url-parameters-11'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-11'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name_t</td>
+<td><code>Full Name</code></td>
+<td>letters, numbers, spaces, max20</td>
+</tr>
+<tr>
+<td>userType_s</td>
+<td><code>general</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>gender_s</td>
+<td><code>male</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>screenName_s</td>
+<td><code>stallion</code></td>
+<td>unique. letters, numbers, max15</td>
+</tr>
+<tr>
+<td>email_s</td>
+<td><code>uname@domain.tld</code></td>
+<td>unique. standard format</td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>d608joeydontsharefood0786a</code></td>
+<td>SHA256. min6 1upcase 1number</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>JSON object hash</td>
+<td>2 keys</td>
+</tr>
+<tr>
+<td>countryCode</td>
+<td><code>+91</code></td>
+<td>picked up from dropdown</td>
+</tr>
+<tr>
+<td>number</td>
+<td><code>9030090300</code></td>
+<td>unique. numbers min6 max10</td>
+</tr>
+<tr>
+<td>platformForReg</td>
+<td><code>android</code></td>
+<td><code>android</code> OR <code>ios</code></td>
+</tr>
+<tr>
+<td>oauthSource</td>
+<td><code>rnyoo</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>timeZone</td>
+<td><code>GMT +5.30</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td><code>../default.png</code></td>
+<td>fully qualified address</td>
+</tr>
+<tr>
+<td>statusMessage</td>
+<td><code>I Renyoo</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>preferredChannels</td>
+<td><code>[&quot;Gadgets&quot;]</code></td>
+<td>comma separated values in array</td>
+</tr>
+<tr>
+<td>devices</td>
+<td>JSON object hash</td>
+<td>--</td>
+</tr>
+<tr>
+<td>android</td>
+<td>JSON object array of hashes w/ 5 keys</td>
+<td><code>android</code> OR <code>ios</code> based on platformForReg value</td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td><code>foobarAndroidNoSocial</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>registrationId</td>
+<td><code>foobarAndroidNoSocialRegId</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>deviceType</td>
+<td><code>phone</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>osVersion</td>
+<td><code>4.1.1</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>registeredOn</td>
+<td><code>1527084033</code></td>
+<td>current Unix epoch</td>
+</tr>
+<tr>
+<td>bio</td>
+<td><code>I am Italian Stallion !!</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-11'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><code>otwF8kvzSqndsuAaAJ0dn6hhMY</code></td>
+<td><code>uid</code> to be passed with subsequent requests.</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>new_user</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>success</code></td>
+<td><code>success</code> OR <code>error</code></td>
+</tr>
+<tr>
+<td>activationCode</td>
+<td><code>481865</code></td>
+<td>OTP to complete activation</td>
+</tr>
+<tr>
+<td>activationStatus</td>
+<td><code>false</code></td>
+<td>always <code>false</code></td>
+</tr>
+<tr>
+<td>reason</td>
+<td><code>Reason for failure</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-11'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Don't trust the user and make sure user input is validated before hitting the request.
+</aside>
+<h2 id='seu1-b-post'>SEU1.b - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooWeb"</span> <span class="se">\</span>
+  -d <span class="s1">'{"name_t":"Full Name","userType_s":"general","gender_s":"male","screenName_s":"stallion","email_s":"uname@domain.tld","phone":{"countryCode":"+91","number":"9030090300"},"platformForReg":"web","oauthSource":"google","timeZone":"GMT +5:30","avatar":"http://rnyooassets.s3.amazonaws.com/avatars/default.png","statusMessage":"I Rnyoo","preferredChannels":["Gadgets"],"devices":{"web":[{"deviceId":"192.168.10.30","registrationId":"foobarRegistrationId", "deviceType":"desktop", "osType":"Windows", "osVersion":"12.0", "browserVersion": "Chrome 36","registeredOn":1414550816}]},"bio": "Name is Bond."}'</span> <span class="se">\</span>
+  -k baseurl/version/users/new 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"otwF8kvhejdn6hhMY"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activationCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">481865</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activationStatus"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the input email address, phone number, screen name is already in use by another Renyoo account:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email, screen name and phone number are already in use"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to create user account with Renyoo on Web using Social platform(s).</p>
+
+<aside class="warning">Note that this endpoint is obsolete. Social Registration/Login is a thing of past, aleast for Renyoo..</aside>
+<h3 id='http-request-12'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/new</code></p>
+<h3 id='request-headers-12'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooWeb</code></td>
+<td><code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
+<h3 id='query-url-parameters-12'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-12'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name_t</td>
+<td><code>Full Name</code></td>
+<td>letters, numbers, spaces, max20</td>
+</tr>
+<tr>
+<td>userType_s</td>
+<td><code>general</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>gender_s</td>
+<td><code>male</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>screenName_s</td>
+<td><code>stallion</code></td>
+<td>unique. letters, numbers, max15</td>
+</tr>
+<tr>
+<td>email_s</td>
+<td><code>uname@domain.tld</code></td>
+<td>unique. standard format</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>JSON object hash</td>
+<td>2 keys</td>
+</tr>
+<tr>
+<td>countryCode</td>
+<td><code>+91</code></td>
+<td>picked up from dropdown</td>
+</tr>
+<tr>
+<td>number</td>
+<td><code>9030090300</code></td>
+<td>unique. numbers min6 max10</td>
+</tr>
+<tr>
+<td>platformForReg</td>
+<td><code>web</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>oauthSource</td>
+<td><code>google</code></td>
+<td><code>google</code> OR <code>facebook</code></td>
+</tr>
+<tr>
+<td>timeZone</td>
+<td><code>GMT +5.30</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td><code>../default.png</code></td>
+<td>fully qualified address</td>
+</tr>
+<tr>
+<td>statusMessage</td>
+<td><code>I Renyoo</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>preferredChannels</td>
+<td><code>[&quot;Gadgets&quot;]</code></td>
+<td>comma separated values in array</td>
+</tr>
+<tr>
+<td>devices</td>
+<td>JSON object hash</td>
+<td>--</td>
+</tr>
+<tr>
+<td>web</td>
+<td>JSON object array of hashes w/ 7 keys</td>
+<td>--</td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td><code>192.168.10.30</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>registrationId</td>
+<td><code>foobarRegistrationId</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>deviceType</td>
+<td><code>desktop</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>osType</td>
+<td><code>windows</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>osVersion</td>
+<td><code>9.1</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>browserVersion</td>
+<td><code>Chrome 36</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>registeredOn</td>
+<td><code>1527084033</code></td>
+<td>current Unix epoch</td>
+</tr>
+<tr>
+<td>bio</td>
+<td><code>Name is Bond</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-12'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><code>otwF8kvhornokplease0dhhMY</code></td>
+<td><code>uid</code> to be passed with subsequent requests.</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>new_user</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>success</code></td>
+<td><code>success</code> OR <code>error</code></td>
+</tr>
+<tr>
+<td>activationCode</td>
+<td><code>481865</code></td>
+<td>OTP to complete activation</td>
+</tr>
+<tr>
+<td>activationStatus</td>
+<td><code>false</code></td>
+<td>always <code>false</code></td>
+</tr>
+<tr>
+<td>reason</td>
+<td><code>Reason for failure</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-12'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Don't trust the user and make sure user input is validated before hitting the request.
+</aside>
+<h2 id='seu1-c-post'>SEU1.c - POST</h2><pre class="highlight shell tab-shell"><code><span class="c"># use SHA256 Cryptographic Hash Function on the Password in your respective platforms. Use converters online to test the API.</span>
+curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooWeb"</span> <span class="se">\</span>
+  -d <span class="s1">'{"name_t":"Full Name","userType_s":"general","gender_s":"male","screenName_s":"stallion","password":"d608joeydontsharefood0786a","email_s":"uname@domain.tld","phone":{"countryCode":"+91","number":"9030090300"},"platformForReg":"web","oauthSource":"rnyoo","timeZone":"GMT +5:30","avatar":"http://rnyooassets.s3.amazonaws.com/avatars/default.png","statusMessage":"I Rnyoo","preferredChannels":["Gadgets"],"devices":{"web":[{"deviceId":"192.168.0.1","registrationId":"foobarWebRegistrationId","deviceType":"web","osVersion":"4.1.1","registeredOn":1527084033}]},"bio": "I am Italian Stallion"}'</span> <span class="se">\</span>
+  -k baseurl/version/users/new 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"4ROmJvlholakNOg31u1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activationCode"</span><span class="p">:</span><span class="mi">427862</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activationStatus"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the input email address, phone number, screen name is already in use by another Renyoo account:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email, screen name and phone number are already in use"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to create user account with Renyoo on Web.</p>
+<h3 id='http-request-13'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/new</code></p>
+<h3 id='request-headers-13'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooWeb</code></td>
+<td><code>RnyooWeb</code></td>
+</tr>
+</tbody></table>
+<h3 id='query-url-parameters-13'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-13'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name_t</td>
+<td><code>Full Name</code></td>
+<td>letters, numbers, spaces, max20</td>
+</tr>
+<tr>
+<td>userType_s</td>
+<td><code>general</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>gender_s</td>
+<td><code>male</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>screenName_s</td>
+<td><code>stallion</code></td>
+<td>unique. letters, numbers, max15</td>
+</tr>
+<tr>
+<td>email_s</td>
+<td><code>uname@domain.tld</code></td>
+<td>unique. standard format</td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>d608joeydontsharefood0786a</code></td>
+<td>SHA256. min6 1upcase 1number</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>JSON object hash</td>
+<td>2 keys</td>
+</tr>
+<tr>
+<td>countryCode</td>
+<td><code>+91</code></td>
+<td>picked up from dropdown</td>
+</tr>
+<tr>
+<td>number</td>
+<td><code>9030090300</code></td>
+<td>unique. numbers min6 max10</td>
+</tr>
+<tr>
+<td>platformForReg</td>
+<td><code>android</code></td>
+<td><code>android</code> OR <code>ios</code></td>
+</tr>
+<tr>
+<td>oauthSource</td>
+<td><code>rnyoo</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>timeZone</td>
+<td><code>GMT +5.30</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td><code>../default.png</code></td>
+<td>fully qualified address</td>
+</tr>
+<tr>
+<td>statusMessage</td>
+<td><code>I Renyoo</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>preferredChannels</td>
+<td><code>[&quot;Gadgets&quot;]</code></td>
+<td>comma separated values in array</td>
+</tr>
+<tr>
+<td>devices</td>
+<td>JSON object hash</td>
+<td>--</td>
+</tr>
+<tr>
+<td>android</td>
+<td>JSON object array of hashes w/ 5 keys</td>
+<td><code>android</code> OR <code>ios</code> based on platformForReg value</td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td><code>foobarAndroidNoSocial</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>registrationId</td>
+<td><code>foobarAndroidNoSocialRegId</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>deviceType</td>
+<td><code>phone</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>osVersion</td>
+<td><code>4.1.1</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>registeredOn</td>
+<td><code>1527084033</code></td>
+<td>current Unix epoch</td>
+</tr>
+<tr>
+<td>bio</td>
+<td><code>I am Italian Stallion !!</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-13'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><code>otwF8kvzSqndsuAaAJ0dn6hhMY</code></td>
+<td><code>uid</code> to be passed with subsequent requests.</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>new_user</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>success</code></td>
+<td><code>success</code> OR <code>error</code></td>
+</tr>
+<tr>
+<td>activationCode</td>
+<td><code>481865</code></td>
+<td>OTP to complete activation</td>
+</tr>
+<tr>
+<td>activationStatus</td>
+<td><code>false</code></td>
+<td>always <code>false</code></td>
+</tr>
+<tr>
+<td>reason</td>
+<td><code>Reason for failure</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-13'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Don't trust the user and make sure user input is validated before hitting the request.
+</aside>
+<h2 id='seu2-post'>SEU2 - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooAndroid"</span> <span class="se">\</span>
+  -d <span class="s1">'{"uid" : "2JHbBjUEgUhola7x4IfM"}'</span> <span class="se">\</span>
+  -k baseurl/version/users/activate 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"otwF8kvzholadn6hhMY"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the uid doesn&#39;t match:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">#</span><span class="w"> </span><span class="err">status</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="mi">400</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"otwF8kvholan6hhMY"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unrecognzied / invalid user"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to activate user account that is recently registered on Mobile app.</p>
+
+<aside class="notice">
+This endpoint must be hit after validating the user input OTP (received on email / mobile) with the one received after successful registration. 
+</aside>
+<h3 id='http-request-14'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/activate</code></p>
+<h3 id='request-headers-14'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooAndroid</code></td>
+<td><code>RnyooAndroid</code> OR <code>RnyooiOS</code></td>
+</tr>
+</tbody></table>
+<h3 id='query-url-parameters-14'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-14'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uid</td>
+<td><code>222JHbBjholax4IfM</code></td>
+<td>received during registration</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-14'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><code>otwF8kvholan6hhMY</code></td>
+<td>uid</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>activate</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>success</code></td>
+<td><code>success</code> OR <code>error</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td><code>Reason for failure</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-14'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>UID doesn&#39;t exist</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
+<h2 id='seu2-a-post'>SEU2.a - POST</h2><pre class="highlight shell tab-shell"><code>curl -i -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"x-rnyoo-client: RnyooWeb"</span> <span class="se">\</span>
+  -d <span class="s1">'{"email": "uname@domain.tld", "activationCode": 123123}'</span> <span class="se">\</span>
+  -k baseurl/version/users/webactivate 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uname@domain.tld"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>In case the uid doesn&#39;t match:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">#</span><span class="w"> </span><span class="err">status</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="mi">400</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uname@domain.tld"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not a valid activation code"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the endpoint to activate user account that is recently registered on Web.</p>
+
+<aside class="notice">
+This endpoint must be hit with OTP (received on email / mobile) after successful registration. 
+</aside>
+<h3 id='http-request-15'>HTTP Request</h3>
+<p><code>POST baseurl/version/users/webactivate</code></p>
+<h3 id='request-headers-15'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>x-rnyoo-client</td>
+<td><code>RnyooWeb</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='query-url-parameters-15'>Query/URL Parameters</h3>
+<p>NA</p>
+<h3 id='data-parameters-15'>Data Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td><code>uname@domain.tld</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>activationCode</td>
+<td><code>123123</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-15'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td><code>uname@domain.tld</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>action</td>
+<td><code>activate</code></td>
+<td>--</td>
+</tr>
+<tr>
+<td>status</td>
+<td><code>success</code></td>
+<td><code>success</code> OR <code>error</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td><code>Reason for failure</code></td>
+<td>--</td>
+</tr>
+</tbody></table>
+<h3 id='error-codes-15'>Error codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>UID doesn&#39;t match / already activated</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Access Forbidden</td>
+<td>Missing <code>x-rnyoo-client</code> header</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Service not found</td>
+<td>Wrong API endpoint</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Bad POST payload</td>
+</tr>
+</tbody></table>
 <h1 id='pod-post'>Pod/Post</h1><h1 id='interests'>Interests</h1><h1 id='buddies'>Buddies</h1><h1 id='channels'>Channels</h1><h1 id='groups'>Groups</h1><h1 id='geotags'>Geotags</h1><h1 id='headers'>Headers</h1>
 <aside class="success">
 This section lists down the <code>Request Headers</code> and <code>Response Headers</code> that Renyoo API uses and their possible meaning. Make sure you understand these codes and factor them while interacting with the API.
