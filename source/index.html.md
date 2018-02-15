@@ -74,6 +74,13 @@ This is the root endpoint to get the Server info and status of the server-side c
 
 `GET baseurl/version/ `
 
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
 ### Query/URL Parameters
 
 NONE
@@ -146,6 +153,13 @@ This endpoint is to check for Android/iOS app minimum/optional version on the Pl
 
 `GET baseurlp/version/update_check`
 
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
 ### Query/URL Parameters
 
 NONE
@@ -177,7 +191,6 @@ Code | Message | Notes
 
 ```shell
 curl -i -v \
-  -X POST \
   -H "Content-Type: application/json" \
   -H "x-rnyoo-client: RnyooAndroid" \
   -d '{"android":{"optionalUpdate":{"optionalVersion":"1.0.3","message":"A new version of the application is available, please click below to update to the latest version"},"requiredUpdate":{"minimumVersion":"1.0.3","message":"A new version of the application is available and is required to continue, please click below to update to the latest version"}},"ios":{"optionalUpdate":{"optionalVersion":"1.2","message":"A new version of the app is available."},"requiredUpdate":{"minimumVersion":"1.1","message":"An update is required to continue using this app."}}}' \
@@ -192,11 +205,20 @@ curl -i -v \
 }
 ```
 
-This endpoint is to set the optional / required app update versions for Android/iOS apps in Playstore/Appstore respectively.
+This endpoint is to set the optional / required app update versions, as and when they are available, for Android/iOS apps in Playstore/Appstore respectively.
+
+<aside class="warning">Note that this endpoint uses Production URL. This is used during Production deployment, probably by a CI/CD pipeline and you must not use it for your development.</aside>
 
 ### HTTP Request
 
 `POST baseurlp/version/appversions`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
 
 ### Query/URL Parameters
 
@@ -249,6 +271,13 @@ This endpoint is to fetch the app configuration.
 ### HTTP Request
 
 `GET baseurl/version/configs`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
 
 ### Query/URL Parameters
 
@@ -316,6 +345,13 @@ This endpoint is to fetch the countries listing.
 
 `GET baseurl/version/countries`
 
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
 ### Query/URL Parameters
 
 NONE
@@ -382,6 +418,13 @@ This endpoint is to fetch the countries listing (with Timestamp passed as URL pa
 
 `GET baseurl/version/countries/status`
 
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
 ### Query/URL Parameters
 
 Key | Value | Notes
@@ -416,7 +459,7 @@ Code | Message | Notes
 curl -i -v \
   -H "Content-Type: application/json" \
   -H "x-rnyoo-client: RnyooAndroid" \
-  -d '{"email_s" : "shreekavi@gleecus.com"}' \
+  -d '{"email_s" : "uname@domain.tld"}' \
   -k baseurl/version/users/validate/email 
 ```
 
@@ -424,7 +467,7 @@ curl -i -v \
 
 ```json
 {
-    "email_s": "shreekavi@gleecus.com",
+    "email_s": "uname@domain.tld",
     "action": "validate",
     "status": "available",
     "message": "You can create Rnyoo account with this email"
@@ -436,7 +479,7 @@ curl -i -v \
 ```json
 # HTTP Status code will be 400
 {
-    "email_s":"sandeep@gleecus.com",
+    "email_s":"uname@domain.tld",
     "action":"validate",
     "status":"unavailable",
     "message":"Given email address is already in use by another Rnyoo account"
@@ -449,6 +492,13 @@ This is the endpoint to validate user email availability as part of Account Regi
 
 `POST baseurl/version/users/validate/email`
 
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
 ### Query/URL Parameters
 
 NA
@@ -457,13 +507,13 @@ NA
 
 Key | Value | Notes
 ------ | ------ | ------
-email_s | `shreekavi@gleecus.com` | User input email
+email_s | `uname@domain.tld` | User input email
 
 ### Response Parameters
 
 Key | Value | Notes
 ---- | ------ | ------
-email_s | `shreekavi@gleecus.com` | --
+email_s | `uname@domain.tld` | --
 action | `validate` | --
 status | `available` | `available` OR `unavailable`
 message | `You can create Rnyoo ... ` | --
@@ -487,7 +537,7 @@ Make sure that the input email is of valid format before sending the request as 
 curl -i -v \
   -H "Content-Type: application/json" \
   -H "x-rnyoo-client: RnyooAndroid" \
-  -d '{"phoneNumber_s" : "+919030055449"}' \
+  -d '{"phoneNumber_s" : "+919030090300"}' \
   -k baseurl/version/users/validate/phonenumber 
 ```
 
@@ -495,19 +545,19 @@ curl -i -v \
 
 ```json
 {
-    "phoneNumber_s": "+919030055449",
+    "phoneNumber_s": "+919030090300",
     "action": "validate",
     "status": "available",
     "message": "You can create Rnyoo account with this email"
 }
 ```
 
-> In case the input email address is already in use by another Renyoo account:
+> In case the input phone number is already in use by another Renyoo account:
 
 ```json
 # HTTP Status code will be 400
 {
-    "phoneNumber_s":"+919030055449",
+    "phoneNumber_s":"+919030090300",
     "action":"validate",
     "status":"unavailable",
     "message":"Given phone number is already in use by another Rnyoo account"
@@ -520,6 +570,13 @@ This is the endpoint to validate user phone number availability as part of Accou
 
 `POST baseurl/version/users/validate/phonenumber`
 
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
 ### Query/URL Parameters
 
 NA
@@ -528,13 +585,13 @@ NA
 
 Key | Value | Notes
 ------ | ------ | ------
-phoneNumber_s | `+919030055449` | User input phone number
+phoneNumber_s | `+919030090300` | User input phone number
 
 ### Response Parameters
 
 Key | Value | Notes
 ---- | ------ | ------
-phoneNumber_s | `+919030055449` | --
+phoneNumber_s | `+919030090300` | --
 action | `validate` | --
 status | `available` | `available` OR `unavailable`
 message | `You can create Rnyoo ... ` | --
@@ -551,6 +608,645 @@ Code | Message | Notes
 <aside class="notice">
 Make sure that the input phone number is of valid format before sending the request as the check isn't implemented upstream.
 </aside>
+
+## SEU0.c - POST
+
+```shell
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
+  -d '{"screenName_s" : "stallion"}' \
+  -k baseurl/version/users/validate/screenname 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "screenName_s": "stallion",
+    "action": "validate",
+    "status": "available",
+    "message": "You can create Rnyoo account with this screen name"
+}
+```
+
+> In case the input screen name is already in use by another Renyoo account:
+
+```json
+# HTTP Status code will be 400
+{
+    "screenName_s":"gekbull",
+    "action":"validate",
+    "status":"unavailable",
+    "message":"Given screen name is already in use by another Rnyoo account"
+}
+```
+
+This is the endpoint to validate user screen name availability as part of Account Registration workflow.
+
+### HTTP Request
+
+`POST baseurl/version/users/validate/screenname`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+screenName_s | `stallion` | User input screen name
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+screenName_s | `stallion` | --
+action | `validate` | --
+status | `available` | `available` OR `unavailable`
+message | `You can create Rnyoo ... ` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+400 | Bad Request | Screen name already in use
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
+<aside class="notice">
+Make sure that the input screen name is of valid format before sending the request as the check isn't implemented upstream.
+</aside>
+
+## SEU1 - POST
+
+```shell
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
+  -d '{"name_t":"Full Name","userType_s":"general", "gender_s":"male", "screenName_s":"stallion","email_s":"uname@domain.tld","phone":{"countryCode":"+91","number":"9030090300"},"platformForReg":"ios","oauthSource":"Google+","timeZone":"GMT +5:30","avatar":"http://rnyooassets.s3.amazonaws.com/avatars/default.png","statusMessage":"I Rnyoo","preferredChannels":["Gadgets"],"devices":{"ios":[{"deviceId":"foobarIOS","registrationId":"foobarIOSRegistrationId","deviceType":"phone","osVersion":"9.1","registeredOn":1527084033}]}, "bio": "Name is Bond."}' \
+  -k baseurl/version/users/new 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": "otwF8kvzsushh0dn6hhMY",
+    "action": "new_user",
+    "status": "success",
+    "activationCode": 481865,
+    "activationStatus": false
+}
+```
+
+> In case the input email address, phone number, screen name is already in use by another Renyoo account:
+
+```json
+{
+    "action": "new_user",
+    "status": "error",
+    "reason": "Email, screen name and phone number are already in use"
+}
+```
+
+This is the endpoint to create user account with Renyoo on Mobile app using Social platform(s).
+
+<aside class="warning">Note that this endpoint is obsolete. Social Registration/Login is a thing of past, aleast for Renyoo..</aside>
+
+### HTTP Request
+
+`POST baseurl/version/users/new`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+name_t | `Full Name` | letters, numbers, spaces, max20
+userType_s | `general` | --
+gender_s | `male` | --
+screenName_s | `stallion` | unique. letters, numbers, max15
+email_s | `uname@domain.tld` | unique. standard format
+phone | JSON object hash | 2 keys
+countryCode | `+91` | picked up from dropdown
+number | `9030090300` | unique. numbers min6 max10
+platformForReg | `ios` | `android` OR `ios`
+oauthSource | `Google+` | `Google+` OR `Facebook`
+timeZone | `GMT +5.30` | --
+avatar | `../default.png` | fully qualified address
+statusMessage | `I Renyoo` | --
+preferredChannels | `["Gadgets"]` | comma separated values in array
+devices | JSON object hash | --
+ios | JSON object array of hashes w/ 5 keys | `android` OR `ios` based on platformForReg value
+deviceId | `foobarIOS` | --
+registrationId | `foobarIOSRegistrationId` | --
+deviceType | `phone` | --
+osVersion | `9.1` | --
+registeredOn | `1527084033` | current Unix epoch
+bio | `Name is Bond` | --
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+id | `otwF8kvzSqndsuAaAJ0dn6hhMY` | `uid` to be passed with subsequent requests.
+action | `new_user` | --
+status | `success` | `success` OR `error`
+activationCode | `481865` | OTP to complete activation
+activationStatus | `false` | always `false`
+reason | `Reason for failure` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
+<aside class="notice">
+Don't trust the user and make sure user input is validated before hitting the request.
+</aside>
+
+## SEU1.a - POST
+
+```shell
+# use SHA256 Cryptographic Hash Function on the Password in your respective platforms. Use converters online to test the API.
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
+  -d '{"name_t":"Full Name", "userType_s":"general","gender_s":"female","screenName_s":"stallion","password":"d608joeydontsharefood0786a", "email_s":"uname@domain.tld","phone":{"countryCode":"+91","number":"9030090300"},"platformForReg":"android","oauthSource":"rnyoo","timeZone":"GMT +5:30","avatar":"http://rnyooassets.s3.amazonaws.com/avatars/default.png","statusMessage":"I Rnyoo","preferredChannels":["Gadgets"],"devices":{"android":[{"deviceId":"foobarAndroidNoSocial","registrationId":"foobarAndroidNoSocialRegId","deviceType":"phone","osVersion":"4.1.1","registeredOn":1527084033}]} ,"bio": "I am Italian Stallion!!"}' \
+  -k baseurl/version/users/new 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id":"4ROmJvlhvoilakNOg31u1",
+    "action":"new_user",
+    "status":"success",
+    "activationCode":427862,
+    "activationStatus":false
+}
+```
+
+> In case the input email address, phone number, screen name is already in use by another Renyoo account:
+
+```json
+{
+    "action": "new_user",
+    "status": "error",
+    "reason": "Email, screen name and phone number are already in use"
+}
+```
+
+This is the endpoint to create user account with Renyoo on Mobile app.
+
+### HTTP Request
+
+`POST baseurl/version/users/new`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS` OR `RnyooWeb`
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+name_t | `Full Name` | letters, numbers, spaces, max20
+userType_s | `general` | --
+gender_s | `male` | --
+screenName_s | `stallion` | unique. letters, numbers, max15
+email_s | `uname@domain.tld` | unique. standard format
+password | `d608joeydontsharefood0786a` | SHA256. min6 1upcase 1number
+phone | JSON object hash | 2 keys
+countryCode | `+91` | picked up from dropdown
+number | `9030090300` | unique. numbers min6 max10
+platformForReg | `android` | `android` OR `ios`
+oauthSource | `rnyoo` | --
+timeZone | `GMT +5.30` | --
+avatar | `../default.png` | fully qualified address
+statusMessage | `I Renyoo` | --
+preferredChannels | `["Gadgets"]` | comma separated values in array
+devices | JSON object hash | --
+android | JSON object array of hashes w/ 5 keys | `android` OR `ios` based on platformForReg value
+deviceId | `foobarAndroidNoSocial` | --
+registrationId | `foobarAndroidNoSocialRegId` | --
+deviceType | `phone` | --
+osVersion | `4.1.1` | --
+registeredOn | `1527084033` | current Unix epoch 
+bio | `I am Italian Stallion !!` | --
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+id | `otwF8kvzSqndsuAaAJ0dn6hhMY` | `uid` to be passed with subsequent requests.
+action | `new_user` | --
+status | `success` | `success` OR `error`
+activationCode | `481865` | OTP to complete activation
+activationStatus | `false` | always `false`
+reason | `Reason for failure` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
+<aside class="notice">
+Don't trust the user and make sure user input is validated before hitting the request.
+</aside>
+
+## SEU1.b - POST
+
+```shell
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooWeb" \
+  -d '{"name_t":"Full Name","userType_s":"general","gender_s":"male","screenName_s":"stallion","email_s":"uname@domain.tld","phone":{"countryCode":"+91","number":"9030090300"},"platformForReg":"web","oauthSource":"google","timeZone":"GMT +5:30","avatar":"http://rnyooassets.s3.amazonaws.com/avatars/default.png","statusMessage":"I Rnyoo","preferredChannels":["Gadgets"],"devices":{"web":[{"deviceId":"192.168.10.30","registrationId":"foobarRegistrationId", "deviceType":"desktop", "osType":"Windows", "osVersion":"12.0", "browserVersion": "Chrome 36","registeredOn":1414550816}]},"bio": "Name is Bond."}' \
+  -k baseurl/version/users/new 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": "otwF8kvhejdn6hhMY",
+    "action": "new_user",
+    "status": "success",
+    "activationCode": 481865,
+    "activationStatus": false
+}
+```
+
+> In case the input email address, phone number, screen name is already in use by another Renyoo account:
+
+```json
+{
+    "action": "new_user",
+    "status": "error",
+    "reason": "Email, screen name and phone number are already in use"
+}
+```
+
+This is the endpoint to create user account with Renyoo on Web using Social platform(s).
+
+<aside class="warning">Note that this endpoint is obsolete. Social Registration/Login is a thing of past, aleast for Renyoo..</aside>
+
+### HTTP Request
+
+`POST baseurl/version/users/new`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooWeb` | `RnyooWeb`
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+name_t | `Full Name` | letters, numbers, spaces, max20
+userType_s | `general` | --
+gender_s | `male` | --
+screenName_s | `stallion` | unique. letters, numbers, max15
+email_s | `uname@domain.tld` | unique. standard format
+phone | JSON object hash | 2 keys
+countryCode | `+91` | picked up from dropdown
+number | `9030090300` | unique. numbers min6 max10
+platformForReg | `web` | --
+oauthSource | `google` | `google` OR `facebook`
+timeZone | `GMT +5.30` | --
+avatar | `../default.png` | fully qualified address
+statusMessage | `I Renyoo` | --
+preferredChannels | `["Gadgets"]` | comma separated values in array
+devices | JSON object hash | --
+web | JSON object array of hashes w/ 7 keys | --
+deviceId | `192.168.10.30` | --
+registrationId | `foobarRegistrationId` | --
+deviceType | `desktop` | --
+osType | `windows` | --
+osVersion | `9.1` | --
+browserVersion | `Chrome 36` | --
+registeredOn | `1527084033` | current Unix epoch
+bio | `Name is Bond` | --
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+id | `otwF8kvhornokplease0dhhMY` | `uid` to be passed with subsequent requests.
+action | `new_user` | --
+status | `success` | `success` OR `error`
+activationCode | `481865` | OTP to complete activation
+activationStatus | `false` | always `false`
+reason | `Reason for failure` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
+<aside class="notice">
+Don't trust the user and make sure user input is validated before hitting the request.
+</aside>
+
+## SEU1.c - POST
+
+```shell
+# use SHA256 Cryptographic Hash Function on the Password in your respective platforms. Use converters online to test the API.
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooWeb" \
+  -d '{"name_t":"Full Name","userType_s":"general","gender_s":"male","screenName_s":"stallion","password":"d608joeydontsharefood0786a","email_s":"uname@domain.tld","phone":{"countryCode":"+91","number":"9030090300"},"platformForReg":"web","oauthSource":"rnyoo","timeZone":"GMT +5:30","avatar":"http://rnyooassets.s3.amazonaws.com/avatars/default.png","statusMessage":"I Rnyoo","preferredChannels":["Gadgets"],"devices":{"web":[{"deviceId":"192.168.0.1","registrationId":"foobarWebRegistrationId","deviceType":"web","osVersion":"4.1.1","registeredOn":1527084033}]},"bio": "I am Italian Stallion"}' \
+  -k baseurl/version/users/new 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id":"4ROmJvlholakNOg31u1",
+    "action":"new_user",
+    "status":"success",
+    "activationCode":427862,
+    "activationStatus":false
+}
+```
+
+> In case the input email address, phone number, screen name is already in use by another Renyoo account:
+
+```json
+{
+    "action": "new_user",
+    "status": "error",
+    "reason": "Email, screen name and phone number are already in use"
+}
+```
+
+This is the endpoint to create user account with Renyoo on Web.
+
+### HTTP Request
+
+`POST baseurl/version/users/new`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooWeb` | `RnyooWeb`
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+name_t | `Full Name` | letters, numbers, spaces, max20
+userType_s | `general` | --
+gender_s | `male` | --
+screenName_s | `stallion` | unique. letters, numbers, max15
+email_s | `uname@domain.tld` | unique. standard format
+password | `d608joeydontsharefood0786a` | SHA256. min6 1upcase 1number
+phone | JSON object hash | 2 keys
+countryCode | `+91` | picked up from dropdown
+number | `9030090300` | unique. numbers min6 max10
+platformForReg | `android` | `android` OR `ios`
+oauthSource | `rnyoo` | --
+timeZone | `GMT +5.30` | --
+avatar | `../default.png` | fully qualified address
+statusMessage | `I Renyoo` | --
+preferredChannels | `["Gadgets"]` | comma separated values in array
+devices | JSON object hash | --
+android | JSON object array of hashes w/ 5 keys | `android` OR `ios` based on platformForReg value
+deviceId | `foobarAndroidNoSocial` | --
+registrationId | `foobarAndroidNoSocialRegId` | --
+deviceType | `phone` | --
+osVersion | `4.1.1` | --
+registeredOn | `1527084033` | current Unix epoch 
+bio | `I am Italian Stallion !!` | --
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+id | `otwF8kvzSqndsuAaAJ0dn6hhMY` | `uid` to be passed with subsequent requests.
+action | `new_user` | --
+status | `success` | `success` OR `error`
+activationCode | `481865` | OTP to complete activation
+activationStatus | `false` | always `false`
+reason | `Reason for failure` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
+<aside class="notice">
+Don't trust the user and make sure user input is validated before hitting the request.
+</aside>
+
+## SEU2 - POST
+
+```shell
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooAndroid" \
+  -d '{"uid" : "2JHbBjUEgUhola7x4IfM"}' \
+  -k baseurl/version/users/activate 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": "otwF8kvzholadn6hhMY",
+    "action": "activate",
+    "status": "success"
+}
+```
+
+> In case the uid doesn't match:
+
+```json
+# status code is 400
+{
+    "id": "otwF8kvholan6hhMY",
+    "action": "activate",
+    "status": "error",
+    "message": "Unrecognzied / invalid user"
+}
+```
+
+This is the endpoint to activate user account that is recently registered on Mobile app.
+
+<aside class="notice">
+This endpoint must be hit after validating the user input OTP (received on email / mobile) with the one received after successful registration. 
+</aside>
+
+### HTTP Request
+
+`POST baseurl/version/users/activate`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooAndroid` | `RnyooAndroid` OR `RnyooiOS`
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+uid | `222JHbBjholax4IfM` | received during registration
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+id | `otwF8kvholan6hhMY` | uid
+action | `activate` | --
+status | `success` | `success` OR `error`
+message | `Reason for failure` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+400 | Bad Request | UID doesn't exist
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
+## SEU2.a - POST
+
+```shell
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooWeb" \
+  -d '{"email": "uname@domain.tld", "activationCode": 123123}' \
+  -k baseurl/version/users/webactivate 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "email": "uname@domain.tld",
+    "action": "activate",
+    "status": "success"
+}
+```
+
+> In case the uid doesn't match:
+
+```json
+# status code is 400
+{
+    "email": "uname@domain.tld",
+    "action": "activate",
+    "status": "error",
+    "message": "Not a valid activation code"
+}
+```
+
+This is the endpoint to activate user account that is recently registered on Web.
+
+<aside class="notice">
+This endpoint must be hit with OTP (received on email / mobile) after successful registration. 
+</aside>
+
+### HTTP Request
+
+`POST baseurl/version/users/webactivate`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooWeb` | --
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+email | `uname@domain.tld` | --
+activationCode | `123123` | --
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+email | `uname@domain.tld` | --
+action | `activate` | --
+status | `success` | `success` OR `error`
+message | `Reason for failure` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+400 | Bad Request | UID doesn't match / already activated
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
 
 
 # Pod/Post
