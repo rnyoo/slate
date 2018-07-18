@@ -1248,6 +1248,84 @@ Code | Message | Notes
 404 | Service not found | Wrong API endpoint
 500 | Internal server error | Bad POST payload
 
+## SEU3.c - POST
+
+```shell
+curl -i -v \
+  -H "Content-Type: application/json" \
+  -H "x-rnyoo-client: RnyooWeb" \
+  -d '{"email_s": "uname@domain.in", "screenName_s": "stallion", "password":"d608joeydontsharefood0786a","device":{"web":{"deviceId":"192.168.10.30","registrationId":"foobarRegistrationId","login":true, "deviceType":"desktop","osType":"Windows", "osVersion":"12.0", "browserVersion": "Chrome 36"}}}' \
+  -k baseurl/version/users/login/nooauth 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "email": "uname@domain.tld",
+    "action": "activate",
+    "status": "success"
+}
+```
+
+> In case the uid doesn't match:
+
+```json
+# status code is 400
+{
+    "email": "uname@domain.tld",
+    "action": "activate",
+    "status": "error",
+    "message": "Not a valid activation code"
+}
+```
+
+This is the endpoint to activate user account that is recently registered on Web.
+
+<aside class="notice">
+This endpoint must be hit with OTP (received on email / mobile) after successful registration. 
+</aside>
+
+### HTTP Request
+
+`POST baseurl/version/users/login/nooauth`
+
+### Request Headers
+
+Key | Value | Notes
+---- | ------ | ------
+Content-Type | `application/json` | --
+x-rnyoo-client | `RnyooWeb` | --
+
+### Query/URL Parameters
+
+NA
+
+### Data Parameters
+
+Key | Value | Notes
+------ | ------ | ------
+email | `uname@domain.tld` | --
+activationCode | `123123` | --
+
+### Response Parameters
+
+Key | Value | Notes
+---- | ------ | ------
+email | `uname@domain.tld` | --
+action | `activate` | --
+status | `success` | `success` OR `error`
+message | `Reason for failure` | --
+
+### Error codes
+
+Code | Message | Notes
+------ | --------- | --------
+400 | Bad Request | UID doesn't match / already activated
+403 | Access Forbidden | Missing `x-rnyoo-client` header
+404 | Service not found | Wrong API endpoint
+500 | Internal server error | Bad POST payload
+
 
 # Pod/Post
 
